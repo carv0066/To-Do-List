@@ -1,0 +1,81 @@
+html {
+    height: 98%;
+    font-family: "Montserrat", sans-serif;
+}
+
+body {
+    background: #3f2a9b;
+    background: linear-gradient(90deg, rgba(63, 42, 155, 1) 0%, rgba(121, 87, 199, 1) 50%, rgba(83, 237, 206, 1) 100%);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container */
+
+.container {
+    background-color: white;
+    padding: 0px 30px;
+    border-radius: 5px;
+    width: 25%;
+}
+
+/* Input field */
+.input-field {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.list-input {
+    background-color: #ebedef;
+    padding: 10px 0px;
+    border: 1px solid #ebedef;
+    border-radius: 5px;
+    width: 73%;
+    text-indent: 10px;
+}
+
+.list-input:focus {
+    outline: none;
+    border: 1px solid #767778;
+}
+
+.add-item {
+    background-color: #C70039;
+    border: none;
+    width: 23%;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Items */
+
+.task-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+input[type='radio'] {
+    transform: scale(1.5);
+}
+
+.item {
+    display: flex;
+    align-items: center;
+}
+
+.item-text{
+    padding-left: 10px;
+}
+
+.delete-item {
+    color: #C70039;
+}

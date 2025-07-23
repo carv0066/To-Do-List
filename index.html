@@ -1,11 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
     <title>To Do List</title>
 </head>
+
 <body>
-    
+
+
+    <div class="container">
+        <h1>To Do List</h1>
+
+        <!-- Input  -->
+        <div class="input-field">
+            <input type="text" id="list-input" name="list-input" placeholder="Add a task" class="list-input">
+            <button class="add-item">Add</button>
+        </div>
+        <br>
+        <!-- Task List -->
+        <div class="task-items">
+            <div class="item">
+                <input type="radio">
+                <label for="item" class="item-text">Wash Clothes</label>
+            </div>
+            <p class="delete-item">x</p>
+        </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
 </body>
+
 </html>
+
+
+
+
+
+
+<!-- Steps -->
+<!-- 
+- Create input form with add button
+- when clicking on add button I should be able to add what i wrote in the input as an item on the list
+- each item should have an option to be deleted with an x button 
+- Input should be cleared after adding something new to my list
+- Each item should have a radio button that can be clicked to signal that the task has been completed
+- after clicking on the radio button, either remove item from list or add a striketrough
+- the to do list should be saved even after reloading the page (local storage)
+-->
