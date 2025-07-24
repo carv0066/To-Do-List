@@ -10,6 +10,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
     <title>To Do List</title>
 </head>
@@ -18,7 +23,10 @@
 
 
     <div class="container">
-        <h1>To Do List</h1>
+        <div class="title-container">
+            <h1 class="title">To Do List</h1>
+            <img src="/images/check-list1.png" alt="check-list" height="32px">
+        </div>
 
         <!-- Input  -->
         <div class="input-field">
@@ -32,7 +40,7 @@
                 <input type="radio">
                 <label for="item" class="item-text">Wash Clothes</label>
             </div>
-            <p class="delete-item">x</p>
+            <img src="/images/cross-red.png" alt="delete" class="delete-item">
         </div>
     </div>
 
@@ -42,19 +50,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-<!-- Steps -->
-<!-- 
-- Create input form with add button
-- when clicking on add button I should be able to add what i wrote in the input as an item on the list
-- each item should have an option to be deleted with an x button 
-- Input should be cleared after adding something new to my list
-- Each item should have a radio button that can be clicked to signal that the task has been completed
-- after clicking on the radio button, either remove item from list or add a striketrough
-- the to do list should be saved even after reloading the page (local storage)
--->
