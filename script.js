@@ -15,6 +15,8 @@ addItem.addEventListener("click", () => {
         const p = fragment
         const newItem = document.createElement("div");
         newItem.classList.add("item");
+        const inputContainer = document.createElement("div");
+        inputContainer.classList.add("input-text");
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.classList.add("checkbox");
@@ -26,8 +28,9 @@ addItem.addEventListener("click", () => {
         deleteIcon.classList.add("delete-item");
         p.textContent = inputText.value; //the text written on the input
         taskList.appendChild(newItem);
-        newItem.appendChild(checkbox);
-        newItem.appendChild(newLabel);
+        newItem.appendChild(inputContainer);
+        inputContainer.appendChild(checkbox);
+        inputContainer.appendChild(newLabel);
         newLabel.appendChild(fragment);
         newItem.appendChild(deleteIcon);
         inputText.value = "";
@@ -36,8 +39,10 @@ addItem.addEventListener("click", () => {
         checkbox.addEventListener("click", () => {
             if (checkbox.checked) {
                 newItem.style.textDecoration = "line-through";
+                newLabel.style.color ="#8f8b8bc8";
             } else {
                 newItem.style.textDecoration = "none";
+                newLabel.style.color ="#0b2540";
             }
         })
 
@@ -54,10 +59,9 @@ addItem.addEventListener("click", () => {
 })
 
 
-//Stlye Checkbox
 //add in corner: completed and deleted
 //the to do list should be saved even after reloading the page (local storage) same with the completed and deleted
 //Make icon on radio button a checkmark
 //Add a clear all button
 //When Clicking the enter button it should work the same way as a click
-//Add Css animations to make everything look cleaner
+//Use CSS to style app 
