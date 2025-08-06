@@ -1,55 +1,71 @@
 const addItem = document.querySelector(".add-item");
 const inputText = document.querySelector(".list-input");
-const taskList = document.querySelector(".task-items");
-const radioBtn = document.querySelector(".radio-button");
+const tasksDiv = document.querySelector(".tasks");
 
+
+//Create task-List container
+const taskList = document.createElement("div");
+taskList.classList.add("task-items");
+tasksDiv.appendChild(taskList);
+
+taskList.innerHTML = localStorage.getItem("savedItem"); //Outaide of the event listener so that the local storage info gets read
 //Add to do list Item
 addItem.addEventListener("click", () => {
     console.log("button has been clicked!!");
     //Create new items when button is clicked
-
     if (inputText.value) {
         //If the value of the input isn't empty then add a to do list item
-        const fragment = document.createDocumentFragment();
-        const p = fragment
         const newItem = document.createElement("div");
         newItem.classList.add("item");
+
         const inputContainer = document.createElement("div");
         inputContainer.classList.add("input-text");
+
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.classList.add("checkbox");
-        const newLabel = document.createElement("label");
-        newLabel.classList.add("item-text");
+
+        const p = document.createElement("p");
+        p.classList.add("item-text");
+        p.textContent = inputText.value; //the text written on the input
+
         const deleteIcon = document.createElement("img");
         deleteIcon.src = "/images/cross-red.png";
         deleteIcon.alt = "delete";
         deleteIcon.classList.add("delete-item");
-        p.textContent = inputText.value; //the text written on the input
-        taskList.appendChild(newItem);
-        newItem.appendChild(inputContainer);
+
         inputContainer.appendChild(checkbox);
-        inputContainer.appendChild(newLabel);
-        newLabel.appendChild(fragment);
+        inputContainer.appendChild(p);
+        newItem.appendChild(inputContainer);
         newItem.appendChild(deleteIcon);
-        const inputValue = inputText.value;
+        taskList.appendChild(newItem);
 
-
-        localStorage.setItem("value", inputValue);//storing value in memory
-
-        newLabel.innerHTML = localStorage.getItem("value");
+        const item = taskList.innerHTML; //store the whole item as a string
+        localStorage.setItem("savedItem", item);
 
         inputText.value = "";
 
 
+
+
         //Add a striketrough whenever the button is clicked 
         checkbox.addEventListener("click", () => {
+            localStorage.setItem("checkboxState", checkbox.checked);
+            console.log('Checkbox state saved:', checkbox.checked);
+
+            const savedState = localStorage.getItem("checkboxState")
+
+            if (savedState !== null) { //Checks if something was saved in the storage before
+                checkbox.checked = (savedState === "true");
+                console.log('Checkbox state loaded:', checkbox.checked);
+            }
+
             if (checkbox.checked) {
                 newItem.style.textDecoration = "line-through";
-                newLabel.style.color ="#8f8b8bc8";
+                newLabel.style.color = "#8f8b8bc8";
             } else {
                 newItem.style.textDecoration = "none";
-                newLabel.style.color ="#0b2540";
+                newLabel.style.color = "#0b2540";
             }
         })
 

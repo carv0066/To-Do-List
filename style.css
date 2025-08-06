@@ -36,6 +36,13 @@ body {
     width: 25%;
 }
 
+/* Input Text */
+
+.input-text {
+    display: flex;
+    align-items: center;
+}
+
 /* Input field */
 .input-field {
     width: 100%;
