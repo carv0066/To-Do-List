@@ -38,7 +38,7 @@ function createTaskElement() {
 }
 
 
-const parsedTasks = JSON.parse(localStorage.getItem("savedItem"));//replaced hardcoded array with the parsedTasks
+const parsedTasks = JSON.parse(localStorage.getItem("savedItem") || "[]");//replaced hardcoded array with the parsedTasks
 
 window.addEventListener("DOMContentLoaded", () => {
     parsedTasks.forEach(item => {
@@ -52,7 +52,7 @@ window.addEventListener("DOMContentLoaded", () => {
 //Add to do list Item
 addItem.addEventListener("click", () => {
     //Create new items when button is clicked
-    const text = inputText.value;
+    let text = inputText.value;
 
     if (text) {
         const itemData = { text, checked: true };
@@ -60,12 +60,11 @@ addItem.addEventListener("click", () => {
         taskList.appendChild(taskElement);
 
         parsedTasks.push(itemData);//I was pushing them to tasks before and thats why it wasn't saving, it was rewriting my local storage everytime
-        console.log("tasks",parsedTasks)
+        console.log("tasks",parsedTasks);
 
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));//Replaced the hardcoded tasks from here too
-        console.log("storage:", localStorage.setItem("savedItem", JSON.stringify(parsedTasks)));
 
-        inputText.value = "";
+        inputText.value = "";//Issue with this at the moment, the input is not clearing up
 
     }})
 
