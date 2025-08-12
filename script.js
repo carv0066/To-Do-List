@@ -2,7 +2,6 @@ const addItem = document.querySelector(".add-item");
 const inputText = document.querySelector(".list-input");
 const tasksDiv = document.querySelector(".tasks");
 
-
 //Create task-List container
 const taskList = document.createElement("div");
 taskList.classList.add("task-items");
@@ -43,16 +42,24 @@ parsedTasks.forEach(item => {
     //I need to push the data and then find  modify it
     console.log("item date being pushed reloaded", parsedTasks);
 
-    createCheckbox.addEventListener("click", () => {
+
+    console.log("item checked1", item.checked);
+    //problem is, if item is already true, whehn i click on the checkbox, it turns it to true again b3fore turning it false,
+    //thats why it has so many issues
+    if (item.checked === true) {
+        console.log("item has been checked previously")
+        createCheckbox.style.backgroundColor = 'red';
+    } else if (item.checked === false) {
+        createCheckbox.style.backgroundColor = '';
+    }
+
+    createCheckbox.addEventListener("change", () => {
         item.checked = createCheckbox.checked;
         console.log("item", item);
-        if (item.checked === true) {
-            createCheckbox.style.backgroundColor = 'green';
-        } else if (item.checked === false) {
-            createCheckbox.style.backgroundColor = 'blue';
-        }
+        console.log("item checked2", item.checked);
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
     });
+
 });
 
 //Add to do list Item
@@ -99,19 +106,16 @@ addItem.addEventListener("click", () => {
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
 
 
-            createCheckbox.addEventListener("click", () => {
-                parsedTasks[taskIndex].checked = createCheckbox.checked;
-                console.log("taskIndex1", taskIndex);
-                if (parsedTasks[taskIndex].checked === true) {
-                    createCheckbox.style.backgroundColor = 'green';
-                } else if (parsedTasks[taskIndex].checked === false) {
-                    createCheckbox.style.backgroundColor = 'blue';
-                }
-                localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
+        createCheckbox.addEventListener("click", () => {
+            parsedTasks[taskIndex].checked = createCheckbox.checked;
+            console.log("taskIndex1", taskIndex);
+            if (parsedTasks[taskIndex].checked === true) {
+                createCheckbox.style.backgroundColor = 'red';
+            } else if (parsedTasks[taskIndex].checked === false) {
+                createCheckbox.style.backgroundColor = '';
+            }
+            localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
         });
-
-        //Only the most recent checkbox added works, once i reload the page the checked value deosnt update
-        //I need to now save the checkbox checked value to be saved when reloading the page,is saved correctly in the local storage but its not being saved correctly when it comes to displaying it
 
 
         console.log(parsedTasks, "is being parsed")
@@ -119,7 +123,7 @@ addItem.addEventListener("click", () => {
 
     }
 })
-//work on checked button with states of true or false
+//Work on color for checkboxes, making sure it saves on localStorage
 //work on delete button
 //work on clear all button
 //Work on score to track completed, and deleted, and maybe it gets reset with a button option for that
