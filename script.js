@@ -39,6 +39,20 @@ parsedTasks.forEach(item => {
     newItem.appendChild(inputContainer);
     newItem.appendChild(deleteIcon);
     taskList.appendChild(newItem);
+
+    //I need to push the data and then find  modify it
+    console.log("item date being pushed reloaded", parsedTasks);
+
+    createCheckbox.addEventListener("click", () => {
+        item.checked = createCheckbox.checked;
+        console.log("item", item);
+        if (item.checked === true) {
+            createCheckbox.style.backgroundColor = 'green';
+        } else if (item.checked === false) {
+            createCheckbox.style.backgroundColor = 'blue';
+        }
+        localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
+    });
 });
 
 //Add to do list Item
@@ -80,18 +94,27 @@ addItem.addEventListener("click", () => {
         //I need to push the data and then find  modify it
         parsedTasks.push(itemData);
         console.log("item date being pushed", itemData);
-        let propertyToChange = "checked";
+        // Capture the index of each object in the array of parsedTaks to know which one to modify
+        const taskIndex = parsedTasks.length - 1;
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
 
-        createCheckbox.addEventListener("click", () => {
-            itemData.checked = createCheckbox.checked;
-            parsedTasks[propertyToChange] = itemData.checked;
-            console.log("the checked value is", itemData.checked);
-            localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
-        }) 
+
+            createCheckbox.addEventListener("click", () => {
+                parsedTasks[taskIndex].checked = createCheckbox.checked;
+                console.log("taskIndex1", taskIndex);
+                if (parsedTasks[taskIndex].checked === true) {
+                    createCheckbox.style.backgroundColor = 'green';
+                } else if (parsedTasks[taskIndex].checked === false) {
+                    createCheckbox.style.backgroundColor = 'blue';
+                }
+                localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
+        });
+
+        //Only the most recent checkbox added works, once i reload the page the checked value deosnt update
         //I need to now save the checkbox checked value to be saved when reloading the page,is saved correctly in the local storage but its not being saved correctly when it comes to displaying it
 
 
+        console.log(parsedTasks, "is being parsed")
         inputText.value = "";
 
     }
@@ -101,36 +124,3 @@ addItem.addEventListener("click", () => {
 //work on clear all button
 //Work on score to track completed, and deleted, and maybe it gets reset with a button option for that
 //shorten code, create functions and remove repeated code
-
-// const checkbox = document.querySelectorAll(".checkbox");
-
-// checkbox.forEach(box => {
-//     box.addEventListener("change", () => {
-//         itemData.checked = box.checked;
-//         console.log("checkboxState", box.checked);
-//         console.log("item data 2", itemData.checked);
-//         localStorage.setItem("checkbox", box.checked);
-//         //currently it only works after reoading the page, so if i add an item imediatly it doesn't really log it in the storage
-//         //currently item date 1 and item data 2 can't be checked at the same time and i need that
-//         //Also this is a good try but I'm still doing it wrong, I already have a local storage where im saving both the text and the checked, i need to update that not a separate key
-//     })
-
-// });
-
-
-//     //Delete item from list
-//     deleteIcon.addEventListener("click", () => {
-//         console.log("item has been deleted");
-//         newItem.remove();
-//     })
-
-// } else {
-//     console.log("input is empty");
-// }
-
-
-//add in corner: completed and deleted
-//Make icon on radio button a checkmark(use images)
-//Add a clear all button
-//When Clicking the enter button it should work the same way as a click
-//Use CSS to style app 
