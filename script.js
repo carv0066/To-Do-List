@@ -46,17 +46,18 @@ parsedTasks.forEach(item => {
     console.log("item checked1", item.checked);
     //problem is, if item is already true, whehn i click on the checkbox, it turns it to true again b3fore turning it false,
     //thats why it has so many issues
-    if (item.checked === true) {
-        console.log("item has been checked previously")
-        createCheckbox.style.backgroundColor = 'red';
-    } else if (item.checked === false) {
-        createCheckbox.style.backgroundColor = '';
-    }
+    //another provlem is, if the checkbox is checked and i reload the page when y try to uncheck it the color red stays, it doesnt dissapear
 
     createCheckbox.addEventListener("change", () => {
         item.checked = createCheckbox.checked;
         console.log("item", item);
         console.log("item checked2", item.checked);
+        if (item.checked === true) {
+            console.log("item has been checked previously")
+            createCheckbox.style.backgroundColor = 'red';
+        } else if (item.checked === false) {
+            createCheckbox.style.backgroundColor = '';
+        }
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
     });
 
@@ -104,7 +105,6 @@ addItem.addEventListener("click", () => {
         // Capture the index of each object in the array of parsedTaks to know which one to modify
         const taskIndex = parsedTasks.length - 1;
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
-
 
         createCheckbox.addEventListener("click", () => {
             parsedTasks[taskIndex].checked = createCheckbox.checked;
