@@ -34,6 +34,9 @@ parsedTasks.forEach(item => {
         p.style.textDecoration = "";
     }
 
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("img-btn");
+
     const deleteIcon = document.createElement("img");
     deleteIcon.src = "/images/cross-red.png";
     deleteIcon.alt = "delete";
@@ -42,8 +45,10 @@ parsedTasks.forEach(item => {
     inputContainer.appendChild(createCheckbox);
     inputContainer.appendChild(p);
     newItem.appendChild(inputContainer);
-    newItem.appendChild(deleteIcon);
+    newItem.appendChild(deleteBtn);
+    deleteBtn.appendChild(deleteIcon);
     taskList.appendChild(newItem);
+
 
     //I need to push the data and then find  modify it
     console.log("item date being pushed reloaded", item);
@@ -60,6 +65,12 @@ parsedTasks.forEach(item => {
         }
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
     });
+
+    deleteIcon.addEventListener("click", () => {
+        console.log("delete has been clicked");
+        console.log("removing item", newItem.remove());
+        localStorage.removeItem("savedItem")
+    })
 
 });
 
@@ -87,6 +98,9 @@ addItem.addEventListener("click", () => {
         p.classList.add("item-text");
         p.textContent = inputText.value; //the text written on the input
 
+        const deleteBtn = document.createElement("button");
+        deleteBtn.classList.add("img-btn");
+
         const deleteIcon = document.createElement("img");
         deleteIcon.src = "/images/cross-red.png";
         deleteIcon.alt = "delete";
@@ -95,7 +109,8 @@ addItem.addEventListener("click", () => {
         inputContainer.appendChild(createCheckbox);
         inputContainer.appendChild(p);
         newItem.appendChild(inputContainer);
-        newItem.appendChild(deleteIcon);
+        newItem.appendChild(deleteBtn);
+        deleteBtn.appendChild(deleteIcon);
         taskList.appendChild(newItem);
 
 
@@ -117,10 +132,13 @@ addItem.addEventListener("click", () => {
             localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
         });
 
-        inputText.value = "";
+
+        deleteBtn.addEventListener("click", () => {
+        });
     }
+
+    inputText.value = "";
 })
-//Add striketrough with the red color
 //work on delete button
 //work on clear all button
 //Work on score to track completed, and deleted, and maybe it gets reset with a button option for that
