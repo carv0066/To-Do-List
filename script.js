@@ -24,9 +24,15 @@ parsedTasks.forEach(item => {
     //So the reason for the double click was that the new checkboxes had a default state of false so even if true was saved in the local storage, visually it would go back to false until the second click
     createCheckbox.type = "checkbox";
     createCheckbox.classList.add("checkbox");
+
     const p = document.createElement("p");
     p.classList.add("item-text");
     p.textContent = item.text; //the text inside the array
+    if (item.checked === true) {
+        p.style.textDecoration = "line-through";
+    } else if (item.checked === false) {
+        p.style.textDecoration = "";
+    }
 
     const deleteIcon = document.createElement("img");
     deleteIcon.src = "/images/cross-red.png";
@@ -46,9 +52,11 @@ parsedTasks.forEach(item => {
         item.checked = createCheckbox.checked;
         console.log("item checked2", item.checked);
         if (item.checked === true) {
-            createCheckbox.style.backgroundColor = '#C70039';
+            createCheckbox.style.backgroundColor = "#C70039";
+            p.style.textDecoration = "line-through";
         } else if (item.checked === false) {
             createCheckbox.style.backgroundColor = '';
+            p.style.textDecoration = "";
         }
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
     });
@@ -100,9 +108,11 @@ addItem.addEventListener("click", () => {
         createCheckbox.addEventListener("change", () => {
             parsedTasks[taskIndex].checked = createCheckbox.checked;
             if (parsedTasks[taskIndex].checked === true) {
-                createCheckbox.style.backgroundColor = '#C70039';
+                createCheckbox.style.backgroundColor = "#C70039";
+                p.style.textDecoration = "line-through";
             } else if (parsedTasks[taskIndex].checked === false) {
                 createCheckbox.style.backgroundColor = '';
+                p.style.textDecoration = "none";
             }
             localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
         });
