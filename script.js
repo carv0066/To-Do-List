@@ -7,13 +7,11 @@ const taskList = document.createElement("div");
 taskList.classList.add("task-items");
 tasksDiv.appendChild(taskList);
 
-
 const parsedTasks = JSON.parse(localStorage.getItem("savedItem") || "[]"); //replaced hardcoded array with the parsedTasks
 console.log("parsed Tasks", parsedTasks);
 
 
 parsedTasks.forEach(item => {
-    console.log("item", item.text);
     const newItem = document.createElement("div");
     newItem.classList.add("item");
 
@@ -21,9 +19,11 @@ parsedTasks.forEach(item => {
     inputContainer.classList.add("input-text");
 
     const createCheckbox = document.createElement("input");
+    createCheckbox.checked = item.checked;
+    //Your data says item.checked = true, But the new checkbox defaults to checked = false
+    //So the reason for the double click was that the new checkboxes had a default state of false so even if true was saved in the local storage, visually it would go back to false until the second click
     createCheckbox.type = "checkbox";
     createCheckbox.classList.add("checkbox");
-
     const p = document.createElement("p");
     p.classList.add("item-text");
     p.textContent = item.text; //the text inside the array
@@ -40,21 +40,13 @@ parsedTasks.forEach(item => {
     taskList.appendChild(newItem);
 
     //I need to push the data and then find  modify it
-    console.log("item date being pushed reloaded", parsedTasks);
-
-
-    console.log("item checked1", item.checked);
-    //problem is, if item is already true, whehn i click on the checkbox, it turns it to true again b3fore turning it false,
-    //thats why it has so many issues
-    //another provlem is, if the checkbox is checked and i reload the page when y try to uncheck it the color red stays, it doesnt dissapear
-
+    console.log("item date being pushed reloaded", item);
+    //First Click seems to always be true for some reason, check why
     createCheckbox.addEventListener("change", () => {
         item.checked = createCheckbox.checked;
-        console.log("item", item);
         console.log("item checked2", item.checked);
         if (item.checked === true) {
-            console.log("item has been checked previously")
-            createCheckbox.style.backgroundColor = 'red';
+            createCheckbox.style.backgroundColor = '#C70039';
         } else if (item.checked === false) {
             createCheckbox.style.backgroundColor = '';
         }
@@ -101,29 +93,24 @@ addItem.addEventListener("click", () => {
 
         //I need to push the data and then find  modify it
         parsedTasks.push(itemData);
-        console.log("item date being pushed", itemData);
         // Capture the index of each object in the array of parsedTaks to know which one to modify
         const taskIndex = parsedTasks.length - 1;
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
 
-        createCheckbox.addEventListener("click", () => {
+        createCheckbox.addEventListener("change", () => {
             parsedTasks[taskIndex].checked = createCheckbox.checked;
-            console.log("taskIndex1", taskIndex);
             if (parsedTasks[taskIndex].checked === true) {
-                createCheckbox.style.backgroundColor = 'red';
+                createCheckbox.style.backgroundColor = '#C70039';
             } else if (parsedTasks[taskIndex].checked === false) {
                 createCheckbox.style.backgroundColor = '';
             }
             localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
         });
 
-
-        console.log(parsedTasks, "is being parsed")
         inputText.value = "";
-
     }
 })
-//Work on color for checkboxes, making sure it saves on localStorage
+//Add striketrough with the red color
 //work on delete button
 //work on clear all button
 //Work on score to track completed, and deleted, and maybe it gets reset with a button option for that
