@@ -7,7 +7,7 @@ const taskList = document.createElement("div");
 taskList.classList.add("task-items");
 tasksDiv.appendChild(taskList);
 
-const parsedTasks = JSON.parse(localStorage.getItem("savedItem") || "[]"); //replaced hardcoded array with the parsedTasks
+let parsedTasks = JSON.parse(localStorage.getItem("savedItem") || "[]"); //replaced hardcoded array with the parsedTasks
 console.log("parsed Tasks", parsedTasks);
 
 
@@ -49,16 +49,17 @@ parsedTasks.forEach(item => {
     deleteBtn.appendChild(deleteIcon);
     taskList.appendChild(newItem);
 
+    let taskIndex = parsedTasks.length - 1;
 
-    //I need to push the data and then find  modify it
-    console.log("item date being pushed reloaded", item);
-    //First Click seems to always be true for some reason, check why
     createCheckbox.addEventListener("change", () => {
+
         item.checked = createCheckbox.checked;
         console.log("item checked2", item.checked);
+
         if (item.checked === true) {
             createCheckbox.style.backgroundColor = "#C70039";
             p.style.textDecoration = "line-through";
+
         } else if (item.checked === false) {
             createCheckbox.style.backgroundColor = '';
             p.style.textDecoration = "";
@@ -66,23 +67,36 @@ parsedTasks.forEach(item => {
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
     });
 
-    deleteIcon.addEventListener("click", () => {
-        console.log("delete has been clicked");
-        console.log("removing item", newItem.remove());
-        localStorage.removeItem("savedItem")
-    })
+    // Delete items when clicking on the button;
+    //Focus on making it work after the reload
+    deleteBtn.addEventListener("click", () => {
+
+        let filteredArray = parsedTasks.filter(item => {
+            return item.id !== taskIndex;
+        })
+
+        newItem.remove();
+        parsedTasks = filteredArray; //Updating the amount of elements array in the parsedTasks array into the new one
+        console.log("filtered array is2:", filteredArray)
+        localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
+
+    });
 
 });
 
 //Add to do list Item
 addItem.addEventListener("click", () => {
     //Create new items when button is clicked
+    let idLength = parsedTasks.length;
     let text = inputText.value;
     if (text) {
         itemData = {
             text,
             checked: false
         };
+
+        itemData.id = idLength;
+        console.log("item data is:", idLength);
         //If the value of the input isn't empty then add a to do list item
         const newItem = document.createElement("div");
         newItem.classList.add("item");
@@ -114,17 +128,18 @@ addItem.addEventListener("click", () => {
         taskList.appendChild(newItem);
 
 
-        //I need to push the data and then find  modify it
         parsedTasks.push(itemData);
-        // Capture the index of each object in the array of parsedTaks to know which one to modify
-        const taskIndex = parsedTasks.length - 1;
+        let taskIndex = parsedTasks.length - 1;
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
 
+        //
         createCheckbox.addEventListener("change", () => {
             parsedTasks[taskIndex].checked = createCheckbox.checked;
+
             if (parsedTasks[taskIndex].checked === true) {
                 createCheckbox.style.backgroundColor = "#C70039";
                 p.style.textDecoration = "line-through";
+
             } else if (parsedTasks[taskIndex].checked === false) {
                 createCheckbox.style.backgroundColor = '';
                 p.style.textDecoration = "none";
@@ -132,8 +147,18 @@ addItem.addEventListener("click", () => {
             localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
         });
 
-
+        // Delete items when clicking on the button;
         deleteBtn.addEventListener("click", () => {
+
+            let filteredArray = parsedTasks.filter(item => {
+                return item.id !== taskIndex;
+            })
+
+            newItem.remove();
+            parsedTasks = filteredArray; //Updating the amount of elements array in the parsedTasks array into the new one
+            console.log("filtered array is2:", filteredArray)
+            localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
+
         });
     }
 
