@@ -164,7 +164,7 @@ addItem.addEventListener("click", () => {
 
     inputText.value = "";
 })
-//work on delete button
+//work on delete button when reloading page
 //work on clear all button
 //Work on score to track completed, and deleted, and maybe it gets reset with a button option for that
 //shorten code, create functions and remove repeated code
