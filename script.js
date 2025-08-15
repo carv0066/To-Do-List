@@ -20,8 +20,7 @@ parsedTasks.forEach(item => {
 
     const createCheckbox = document.createElement("input");
     createCheckbox.checked = item.checked;
-    //Your data says item.checked = true, But the new checkbox defaults to checked = false
-    //So the reason for the double click was that the new checkboxes had a default state of false so even if true was saved in the local storage, visually it would go back to false until the second click
+    //reason for the double click was that the new checkboxes had a default state of false so even if true was saved in the local storage, visually it would go back to false until the second click
     createCheckbox.type = "checkbox";
     createCheckbox.classList.add("checkbox");
 
@@ -49,8 +48,6 @@ parsedTasks.forEach(item => {
     deleteBtn.appendChild(deleteIcon);
     taskList.appendChild(newItem);
 
-    let taskIndex = parsedTasks.length - 1;
-
     createCheckbox.addEventListener("change", () => {
 
         item.checked = createCheckbox.checked;
@@ -70,9 +67,8 @@ parsedTasks.forEach(item => {
     // Delete items when clicking on the button;
     //Focus on making it work after the reload
     deleteBtn.addEventListener("click", () => {
-
-        let filteredArray = parsedTasks.filter(item => {
-            return item.id !== taskIndex;
+        let filteredArray = parsedTasks.filter(itemId => {
+            return itemId.id !== item.id;
         })
 
         newItem.remove();
@@ -81,8 +77,13 @@ parsedTasks.forEach(item => {
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
 
     });
-
 });
+
+
+
+
+
+
 
 //Add to do list Item
 addItem.addEventListener("click", () => {
