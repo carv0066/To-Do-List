@@ -6,10 +6,21 @@ const tasksDiv = document.querySelector(".tasks");
 const taskList = document.createElement("div");
 taskList.classList.add("task-items");
 tasksDiv.appendChild(taskList);
+let newItem = document.createElement("div");
 
 let parsedTasks = JSON.parse(localStorage.getItem("savedItem") || "[]"); //replaced hardcoded array with the parsedTasks
 console.log("parsed Tasks", parsedTasks);
 
+function deleteTask(taskId) {
+    console.log("taskID", taskId)
+    let filteredArray = parsedTasks.filter(item => {
+        return item.id !== taskId;
+    })
+    newItem.remove();
+    parsedTasks = filteredArray; //Updating the amount of elements array in the parsedTasks array into the new one
+    console.log("filtered array is2:", filteredArray)
+    localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
+}
 
 parsedTasks.forEach(item => {
     const newItem = document.createElement("div");
@@ -80,11 +91,6 @@ parsedTasks.forEach(item => {
 });
 
 
-
-
-
-
-
 //Add to do list Item
 addItem.addEventListener("click", () => {
     //Create new items when button is clicked
@@ -99,7 +105,7 @@ addItem.addEventListener("click", () => {
         itemData.id = idLength;
         console.log("item data is:", idLength);
         //If the value of the input isn't empty then add a to do list item
-        const newItem = document.createElement("div");
+        newItem = document.createElement("div");
         newItem.classList.add("item");
 
         const inputContainer = document.createElement("div");
@@ -149,17 +155,8 @@ addItem.addEventListener("click", () => {
         });
 
         // Delete items when clicking on the button;
-        deleteBtn.addEventListener("click", () => {
-
-            let filteredArray = parsedTasks.filter(item => {
-                return item.id !== taskIndex;
-            })
-
-            newItem.remove();
-            parsedTasks = filteredArray; //Updating the amount of elements array in the parsedTasks array into the new one
-            console.log("filtered array is2:", filteredArray)
-            localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
-
+        deleteBtn.addEventListener("click", (event) => {
+            
         });
     }
 
