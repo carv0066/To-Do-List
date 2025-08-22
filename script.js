@@ -136,18 +136,17 @@ addItem.addEventListener("click", () => {
 
 
         parsedTasks.push(itemData);
-        let taskIndex = parsedTasks.length - 1;
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
 
         //
         createCheckbox.addEventListener("change", () => {
-            parsedTasks[taskIndex].checked = createCheckbox.checked;
+            itemData.checked = createCheckbox.checked;
 
-            if (parsedTasks[taskIndex].checked === true) {
+            if (itemData.checked === true) {
                 createCheckbox.style.backgroundColor = "#C70039";
                 p.style.textDecoration = "line-through";
 
-            } else if (parsedTasks[taskIndex].checked === false) {
+            } else if (itemData.checked === false) {
                 createCheckbox.style.backgroundColor = '';
                 p.style.textDecoration = "none";
             }
@@ -170,7 +169,6 @@ addItem.addEventListener("click", () => {
 
     inputText.value = "";
 })
-//work on delete button when reloading page
 //work on clear all button
 //Work on score to track completed, and deleted, and maybe it gets reset with a button option for that
 //shorten code, create functions and remove repeated code
