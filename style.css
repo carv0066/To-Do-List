@@ -91,6 +91,27 @@ body {
     background-color: #9a002c;
 }
 
+/* Delete All */
+
+.delete-all {
+    background-color: #C70039;
+    border: none;
+    width: 23%;
+    color: white;
+    padding: 14px 10px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    position: relative;
+    transition: background-color 0.1s ease-out;
+}
+
+.delete-all:hover {
+    background-color: #9a002c;
+}
+
 /* Items */
 
 .task-items {

@@ -1,6 +1,7 @@
 const addItem = document.querySelector(".add-item");
 const inputText = document.querySelector(".list-input");
 const tasksDiv = document.querySelector(".tasks");
+const deleteAll = document.querySelector(".delete-all");
 
 //Create task-List container
 const taskList = document.createElement("div");
@@ -10,17 +11,6 @@ let newItem = document.createElement("div");
 
 let parsedTasks = JSON.parse(localStorage.getItem("savedItem") || "[]"); //replaced hardcoded array with the parsedTasks
 console.log("parsed Tasks", parsedTasks);
-
-function deleteTask(taskId) {
-    console.log("taskID", taskId)
-    let filteredArray = parsedTasks.filter(item => {
-        return item.id !== taskId;
-    })
-    newItem.remove();
-    parsedTasks = filteredArray; //Updating the amount of elements array in the parsedTasks array into the new one
-    console.log("filtered array is2:", filteredArray)
-    localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
-}
 
 parsedTasks.forEach(item => {
     const newItem = document.createElement("div");
@@ -161,14 +151,23 @@ addItem.addEventListener("click", () => {
 
             newItem.remove();
             parsedTasks = filteredArray; //Updating the amount of elements array in the parsedTasks array into the new one
-            console.log("filtered array is1 no forEach:", filteredArray)
             localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
 
         });
+
     }
 
     inputText.value = "";
 })
-//work on clear all button
+
+
+//work on Clear all button
+deleteAll.addEventListener("click", () => {
+    taskList.innerHTML = "";
+    parsedTasks.splice(0, parsedTasks.length)
+    console.log("parsed Tasks all", parsedTasks)
+    localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
+
+})
 //Work on score to track completed, and deleted, and maybe it gets reset with a button option for that
 //shorten code, create functions and remove repeated code
