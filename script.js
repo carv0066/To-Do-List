@@ -76,7 +76,6 @@ parsedTasks.forEach(item => {
     });
 
     // Delete items when clicking on the button;
-    //Focus on making it work after the reload
     deleteBtn.addEventListener("click", () => {
         let filteredArray = parsedTasks.filter(itemId => {
             return itemId.id !== item.id;
@@ -97,7 +96,7 @@ addItem.addEventListener("click", () => {
     let idLength = parsedTasks.length;
     let text = inputText.value;
     if (text) {
-        itemData = {
+        const itemData = {
             text,
             checked: false
         };
@@ -105,6 +104,7 @@ addItem.addEventListener("click", () => {
         itemData.id = idLength;
         console.log("item data is:", idLength);
         //If the value of the input isn't empty then add a to do list item
+        let newItem = document.createElement("div");
         newItem = document.createElement("div");
         newItem.classList.add("item");
 
@@ -155,8 +155,16 @@ addItem.addEventListener("click", () => {
         });
 
         // Delete items when clicking on the button;
-        deleteBtn.addEventListener("click", (event) => {
-            
+        deleteBtn.addEventListener("click", () => {
+            let filteredArray = parsedTasks.filter(itemId => {
+                return itemId.id !== itemData.id;
+            })
+
+            newItem.remove();
+            parsedTasks = filteredArray; //Updating the amount of elements array in the parsedTasks array into the new one
+            console.log("filtered array is1 no forEach:", filteredArray)
+            localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
+
         });
     }
 
