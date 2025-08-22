@@ -169,5 +169,9 @@ deleteAll.addEventListener("click", () => {
     localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
 
 })
+
 //Work on score to track completed, and deleted, and maybe it gets reset with a button option for that
+
+
+
 //shorten code, create functions and remove repeated code
