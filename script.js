@@ -171,7 +171,16 @@ deleteAll.addEventListener("click", () => {
 })
 
 //Work on score to track completed, and deleted, and maybe it gets reset with a button option for that
-
+//if checkbox is checked, increase completed number
+//if checkbox is not checked, decrease number
+//if deleted button is clicked, track deleted number
+//save to loca storage too
+function completed() {
+    const createCheckbox = document.createElement("input");
+    if(createCheckbox.checked) {
+        
+    }
+}
 
 
 //shorten code, create functions and remove repeated code
