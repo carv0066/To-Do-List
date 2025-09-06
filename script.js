@@ -184,10 +184,12 @@ addItem.addEventListener("click", () => {
 //work on Clear all button
 deleteAll.addEventListener("click", () => {
     taskList.innerHTML = "";
-    parsedTasks.splice(0, parsedTasks.length)
+    parsedTasks.splice(0, parsedTasks.length);
     completedItems.textContent =  0;
     deletedItems.textContent = 0;
     localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
+    localStorage.setItem("Completed", completedItems.textContent);
+    localStorage.setItem("Deleted", deletedItems.textContent);
 
 })
 
