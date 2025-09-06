@@ -128,13 +128,18 @@ addItem.addEventListener("click", () => {
         parsedTasks.push(itemData);
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
 
-        //
+        let completedItems = document.querySelector(".completed");
+        let completedItemsNumber = parseInt(completedItems.textContent);
         createCheckbox.addEventListener("change", () => {
             itemData.checked = createCheckbox.checked;
 
             if (itemData.checked === true) {
                 createCheckbox.style.backgroundColor = "#C70039";
                 p.style.textDecoration = "line-through";
+
+                completedItemsNumber++;
+                console.log("completed items", completedItemsNumber);
+                console.log("item has been completed");
 
             } else if (itemData.checked === false) {
                 createCheckbox.style.backgroundColor = '';
@@ -172,15 +177,11 @@ deleteAll.addEventListener("click", () => {
 
 //Work on score to track completed, and deleted, and maybe it gets reset with a button option for that
 //if checkbox is checked, increase completed number
+
+
 //if checkbox is not checked, decrease number
 //if deleted button is clicked, track deleted number
 //save to loca storage too
-function completed() {
-    const createCheckbox = document.createElement("input");
-    if(createCheckbox.checked) {
-        
-    }
-}
 
 
 //shorten code, create functions and remove repeated code
