@@ -185,13 +185,11 @@ addItem.addEventListener("click", () => {
 deleteAll.addEventListener("click", () => {
     taskList.innerHTML = "";
     parsedTasks.splice(0, parsedTasks.length)
-    console.log("parsed Tasks all", parsedTasks)
+    completedItems.textContent =  0;
+    deletedItems.textContent = 0;
     localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
 
 })
-
-//completed and deleted are not being saved in the local storage
-//if deleted button is clicked, track deleted number
 
 
 //shorten code, create functions and remove repeated code
