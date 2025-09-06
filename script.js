@@ -3,8 +3,10 @@ const inputText = document.querySelector(".list-input");
 const tasksDiv = document.querySelector(".tasks");
 const deleteAll = document.querySelector(".delete-all");
 let completedItems = document.querySelector(".completed");
+let deletedItems = document.querySelector(".deleted");
 
 completedItems.innerHTML = localStorage.getItem("Completed");
+deletedItems.innerHTML = localStorage.getItem("Deleted");
 //Create task-List container
 const taskList = document.createElement("div");
 taskList.classList.add("task-items");
@@ -83,6 +85,7 @@ parsedTasks.forEach(item => {
         parsedTasks = filteredArray; //Updating the amount of elements array in the parsedTasks array into the new one
         console.log("filtered array is2:", filteredArray)
         localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
+        localStorage.setItem("Deleted", deletedItems.textContent);
 
     });
 });
@@ -165,7 +168,10 @@ addItem.addEventListener("click", () => {
 
             newItem.remove();
             parsedTasks = filteredArray; //Updating the amount of elements array in the parsedTasks array into the new one
+            //Decrease amount when checked
+            deletedItems.textContent++;
             localStorage.setItem("savedItem", JSON.stringify(parsedTasks));
+            localStorage.setItem("Deleted", deletedItems.textContent);
 
         });
 
@@ -186,7 +192,6 @@ deleteAll.addEventListener("click", () => {
 
 //completed and deleted are not being saved in the local storage
 //if deleted button is clicked, track deleted number
-//save to loca storage too
 
 
 //shorten code, create functions and remove repeated code
